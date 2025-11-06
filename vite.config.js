@@ -8,13 +8,12 @@ export default defineConfig({
     commonjsOptions: {
       transformMixedEsModules: true,
     },
+    rollupOptions: {
+      external: [],
+    },
   },
   optimizeDeps: {
     include: ["react-quill-new", "quill-blot-formatter"],
-  },
-  resolve: {
-    alias: {
-      quill: "react-quill-new/node_modules/quill",
-    },
+    exclude: [],
   },
 });
