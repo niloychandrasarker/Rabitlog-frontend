@@ -76,7 +76,7 @@ const Navber = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="w-full h-16 md:h-20 flex items-center justify-between relative z-50 backdrop-blur-md border-b border-gray-100">
+    <nav className="w-full h-16 md:h-20 flex items-center justify-between relative z-50 backdrop-blur-md ">
       {/* Logo */}
       <Link
         to="/"

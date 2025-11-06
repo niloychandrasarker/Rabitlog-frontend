@@ -27,7 +27,7 @@ const SinglePostPage = () => {
   const contentHtml = data.content || "";
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 mt-2">
       {/* Details */}
       <div className="flex gap-8">
         <div className="lg:w-3/5 flex flex-col gap-8">
