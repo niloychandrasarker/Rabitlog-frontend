@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { format } from "timeago.js";
 
 const fetchTrendingPosts = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
@@ -78,35 +77,35 @@ const TrendingPosts = () => {
   }
 
   return (
-    <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 border border-orange-100">
+    <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl md:rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-4 md:p-6 border border-orange-100">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold flex items-center gap-3">
-          <span className="text-3xl">🔥</span>
+      <div className="flex items-center justify-between mb-4 md:mb-6">
+        <h2 className="text-xl md:text-2xl font-bold flex items-center gap-2 md:gap-3">
+          <span className="text-2xl md:text-3xl">🔥</span>
           <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
             Trending Now
           </span>
         </h2>
-        <div className="px-3 py-1 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold rounded-full shadow-md">
+        <div className="px-2 md:px-3 py-1 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold rounded-full shadow-md">
           HOT
         </div>
       </div>
 
       {/* Divider */}
-      <div className="h-1 bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 rounded-full mb-6" />
+      <div className="h-0.5 md:h-1 bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 rounded-full mb-4 md:mb-6" />
 
       {/* Posts List */}
-      <div className="space-y-3">
+      <div className="space-y-2 md:space-y-3">
         {posts.map((post, index) => (
           <Link
             key={post._id}
             to={`/${post.slug}`}
-            className="flex gap-4 group p-3 rounded-xl transition-all duration-300 bg-white hover:bg-gradient-to-r hover:from-orange-50 hover:to-white hover:shadow-md border border-transparent hover:border-orange-200"
+            className="flex gap-3 md:gap-4 group p-2 md:p-3 rounded-lg md:rounded-xl transition-all duration-300 bg-white hover:bg-gradient-to-r hover:from-orange-50 hover:to-white hover:shadow-md border border-transparent hover:border-orange-200"
           >
             {/* Ranking Badge */}
             <div className="flex-shrink-0">
               <div
-                className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shadow-md transition-transform group-hover:scale-110 ${
+                className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-xs md:text-sm shadow-md transition-transform group-hover:scale-110 ${
                   index === 0
                     ? "bg-gradient-to-br from-yellow-400 to-orange-500 text-white"
                     : index === 1
@@ -122,24 +121,24 @@ const TrendingPosts = () => {
 
             {/* Content */}
             <div className="flex-1 min-w-0">
-              <h3 className="font-bold text-sm line-clamp-2 group-hover:text-orange-600 transition-colors leading-snug mb-1">
+              <h3 className="font-bold text-xs md:text-sm line-clamp-2 group-hover:text-orange-600 transition-colors leading-snug mb-1">
                 {post.title}
               </h3>
-              <div className="flex items-center gap-2 text-xs text-gray-500">
-                <span className="flex items-center gap-1">
+              <div className="flex items-center gap-1.5 md:gap-2 text-[10px] md:text-xs text-gray-500">
+                <span className="flex items-center gap-1 truncate">
                   <svg
-                    className="w-3 h-3"
+                    className="w-3 h-3 flex-shrink-0"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
                     <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
                   </svg>
-                  {post.user?.username}
+                  <span className="truncate">{post.user?.username}</span>
                 </span>
-                <span>•</span>
-                <span className="flex items-center gap-1">
+                <span className="hidden sm:inline">•</span>
+                <span className="hidden sm:flex items-center gap-1">
                   <svg
-                    className="w-3 h-3"
+                    className="w-3 h-3 flex-shrink-0"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -152,15 +151,13 @@ const TrendingPosts = () => {
                   </svg>
                   {post.visit || 0}
                 </span>
-                <span>•</span>
-                <span>{format(post.createdAt)}</span>
               </div>
             </div>
 
             {/* Arrow Icon */}
             <div className="flex-shrink-0 self-center">
               <svg
-                className="w-5 h-5 text-gray-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all"
+                className="w-4 h-4 md:w-5 md:h-5 text-gray-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -180,11 +177,11 @@ const TrendingPosts = () => {
       {/* View All Button */}
       <Link
         to="/trending"
-        className="mt-6 flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold rounded-xl transition-all duration-300 shadow-md hover:shadow-lg group"
+        className="mt-4 md:mt-6 flex items-center justify-center gap-2 w-full py-2.5 md:py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold text-sm md:text-base rounded-lg md:rounded-xl transition-all duration-300 shadow-md hover:shadow-lg group"
       >
         <span>View All Trending</span>
         <svg
-          className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+          className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

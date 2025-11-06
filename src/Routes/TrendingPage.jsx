@@ -57,11 +57,11 @@ const TrendingPage = () => {
 
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-800 flex items-center gap-3 mb-2">
-          <span className="text-5xl">🔥</span>
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 flex items-center gap-3 mb-2">
+          <span className="text-4xl sm:text-5xl">🔥</span>
           Trending Posts
         </h1>
-        <p className="text-gray-600 text-lg">
+        <p className="text-gray-600 text-base sm:text-lg">
           Most popular articles from the last 7 days
         </p>
       </div>
@@ -72,12 +72,14 @@ const TrendingPage = () => {
           No trending posts found.
         </div>
       ) : (
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {posts.map((post, index) => (
-            <div key={post._id} className="flex gap-4 items-start">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-red-600 flex items-center justify-center text-white font-bold text-xl shadow-lg">
+            <div key={post._id} className="flex gap-3 sm:gap-4 items-start">
+              {/* Ranking Badge - Hidden on Mobile */}
+              <div className="hidden sm:flex flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-red-600 items-center justify-center text-white font-bold text-xl shadow-lg">
                 {index + 1}
               </div>
+              {/* Post Card */}
               <div className="flex-1">
                 <PostListItem post={post} />
               </div>

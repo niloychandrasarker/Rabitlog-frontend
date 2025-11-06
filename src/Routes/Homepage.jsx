@@ -7,33 +7,65 @@ import PopularPosts from "../componenet/PopularPosts";
 
 const Homepage = () => {
   return (
-    <div className="mt-4 flex flex-col gap-4">
+    <div className="mt-4 flex flex-col gap-6 md:gap-8">
       {/* BreadCrumb */}
-      <div className="flex gap-4">
-        <Link to="/">Home</Link>
-        <span>•</span>
-        <span className="text-blue-800">Blogs and Articles</span>
+      <div className="flex gap-2 text-sm md:text-base">
+        <Link
+          to="/"
+          className="text-gray-600 hover:text-blue-600 transition-colors"
+        >
+          Home
+        </Link>
+        <span className="text-gray-400">•</span>
+        <span className="text-blue-800 font-medium">Blogs and Articles</span>
       </div>
-      {/* Introduction */}
-      <div className="flex items-center justify-between">
-        {/* titles */}
-        <div className="">
-          <h1 className="text-gray-800 text-2xl md:text-5xl lg:text-6xl font-bold">
-            Discover, discuss, and redefine technology <br /> — one blog at a
-            time
+
+      {/* Hero Section */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
+        {/* Titles */}
+        <div className="flex-1">
+          <h1 className="text-gray-800 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+            Discover, discuss, and redefine technology{" "}
+            <span className="hidden md:inline">
+              <br />
+            </span>
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              — one blog at a time
+            </span>
           </h1>
-          <p className="mt-8 text-md md:text-xl">
+          <p className="mt-4 md:mt-8 text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed">
             Discover amazing articles, share your ideas, and connect with
             writers from around the globe. Your voice matters here.
           </p>
+
+          {/* Mobile CTA Button */}
+          <Link
+            to="/write"
+            className="md:hidden inline-flex items-center gap-2 mt-6 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 4v16m8-8H4"
+              />
+            </svg>
+            Write Your Story
+          </Link>
         </div>
-        {/* animated button */}
-        <Link to="write" className="hidden md:block relative">
+
+        {/* Animated Button - Desktop Only */}
+        <Link to="/write" className="hidden md:block relative flex-shrink-0">
           <svg
             viewBox="0 0 200 200"
             width="200"
             height="200"
-            // className="text-lg tracking-widest "
             className="text-lg tracking-widest animate-spin animateButton"
           >
             <path
@@ -50,7 +82,7 @@ const Homepage = () => {
               </textPath>
             </text>
           </svg>
-          <button className="absolute top-0 left-0 right-0 bottom-0 m-auto w-20 h-20 bg-blue-800 rounded-full flex items-center justify-center">
+          <button className="absolute top-0 left-0 right-0 bottom-0 m-auto w-20 h-20 bg-blue-800 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors shadow-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -66,13 +98,15 @@ const Homepage = () => {
           </button>
         </Link>
       </div>
+
       {/* CATEGORIES */}
       <MainCategories />
+
       {/* Feature Post */}
       <FeaturedPosts />
 
       {/* TRENDING & POPULAR SECTION */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-8">
         <TrendingPosts />
         <PopularPosts />
       </div>
@@ -80,20 +114,20 @@ const Homepage = () => {
       {/* RECENT POSTS - FULL WIDTH */}
       <div className="mb-8">
         {/* Section Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
-                <span className="text-4xl">📰</span>
-                Recent Posts
+        <div className="mb-6 md:mb-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex-1">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 flex items-center gap-2 md:gap-3">
+                <span className="text-3xl md:text-4xl">📰</span>
+                <span>Recent Posts</span>
               </h2>
-              <p className="text-gray-600 mt-2">
+              <p className="text-sm md:text-base text-gray-600 mt-2">
                 Stay updated with the latest articles and insights
               </p>
             </div>
             <Link
               to="/posts"
-              className="hidden md:flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors font-medium"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors font-medium text-sm md:text-base whitespace-nowrap"
             >
               View All
               <svg

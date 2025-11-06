@@ -4,7 +4,7 @@ import { format } from "timeago.js";
 
 const PostListItem = ({ post }) => {
   return (
-    <article className="group flex flex-col xl:flex-row gap-0 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-blue-200">
+    <article className="group flex flex-col xl:flex-row gap-0 bg-white rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-blue-200">
       {/* image */}
       {post.img && (
         <Link
@@ -14,37 +14,37 @@ const PostListItem = ({ post }) => {
           <div className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500 z-10" />
           <Image
             src={post.img}
-            className="w-full h-64 xl:h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            className="w-full h-48 sm:h-64 xl:h-full object-cover group-hover:scale-105 transition-transform duration-700"
             w="500"
           />
           {/* Category Badge */}
-          <div className="absolute top-4 left-4 z-20">
-            <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white text-xs font-semibold rounded-full shadow-lg backdrop-blur-sm">
+          <div className="absolute top-3 left-3 md:top-4 md:left-4 z-20">
+            <span className="inline-flex items-center gap-1 px-2 md:px-3 py-1 md:py-1.5 bg-blue-600 text-white text-xs font-semibold rounded-full shadow-lg backdrop-blur-sm">
               <span>📁</span>
-              {post.category}
+              <span className="hidden sm:inline">{post.category}</span>
             </span>
           </div>
         </Link>
       )}
       {/* details */}
-      <div className="flex flex-col gap-4 xl:w-3/5 p-8">
+      <div className="flex flex-col gap-3 md:gap-4 xl:w-3/5 p-4 sm:p-6 md:p-8">
         {/* Author Info & Date */}
-        <div className="flex items-center gap-3 text-sm">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xs">
+        <div className="flex items-center gap-2 md:gap-3 text-xs md:text-sm">
+          <div className="flex items-center gap-1.5 md:gap-2">
+            <div className="w-7 h-7 md:w-8 md:h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xs">
               {post.user?.username?.charAt(0).toUpperCase()}
             </div>
             <Link
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors truncate max-w-[120px] sm:max-w-none"
               to={`/posts?author=${post.user?.username}`}
             >
               {post.user?.username}
             </Link>
           </div>
-          <span className="text-gray-400">•</span>
-          <span className="text-gray-500 flex items-center gap-1">
+          <span className="text-gray-400 hidden sm:inline">•</span>
+          <span className="text-gray-500 hidden sm:flex items-center gap-1">
             <svg
-              className="w-4 h-4"
+              className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -63,23 +63,23 @@ const PostListItem = ({ post }) => {
         {/* Title */}
         <Link
           to={`/${post.slug}`}
-          className="text-2xl lg:text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight"
+          className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight"
         >
           {post.title}
         </Link>
 
         {/* Description */}
-        <p className="text-gray-600 leading-relaxed line-clamp-3 text-base">
+        <p className="text-sm md:text-base text-gray-600 leading-relaxed line-clamp-2 md:line-clamp-3">
           {post.desc}
         </p>
 
         {/* Footer with Stats & CTA */}
-        <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+        <div className="flex items-center justify-between mt-auto pt-3 md:pt-4 border-t border-gray-100">
           {/* Stats */}
-          <div className="flex items-center gap-4 text-sm text-gray-500">
+          <div className="flex items-center gap-3 md:gap-4 text-xs md:text-sm text-gray-500">
             <span className="flex items-center gap-1">
               <svg
-                className="w-4 h-4"
+                className="w-3 h-3 md:w-4 md:h-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -99,9 +99,9 @@ const PostListItem = ({ post }) => {
               </svg>
               {post.visit || 0}
             </span>
-            <span className="flex items-center gap-1">
+            <span className="hidden sm:flex items-center gap-1">
               <svg
-                className="w-4 h-4"
+                className="w-3 h-3 md:w-4 md:h-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -120,11 +120,12 @@ const PostListItem = ({ post }) => {
           {/* Read More Button */}
           <Link
             to={`/${post.slug}`}
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 font-semibold text-sm group/btn transition-all duration-300 shadow-md hover:shadow-lg"
+            className="inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-5 py-2 md:py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 font-semibold text-xs md:text-sm group/btn transition-all duration-300 shadow-md hover:shadow-lg"
           >
-            Read Article
+            <span className="hidden sm:inline">Read Article</span>
+            <span className="sm:hidden">Read</span>
             <svg
-              className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform"
+              className="w-3 h-3 md:w-4 md:h-4 group-hover/btn:translate-x-1 transition-transform"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
