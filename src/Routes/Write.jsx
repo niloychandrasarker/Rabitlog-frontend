@@ -1,7 +1,6 @@
 import { useAuth, useUser } from "@clerk/clerk-react";
 import "react-quill-new/dist/quill.snow.css";
 import ReactQuill, { Quill } from "react-quill-new";
-import ImageResize from "quill-image-resize-module-react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
@@ -9,9 +8,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Upload from "../componenet/Upload";
 import ImageAlignmentButtons from "../componenet/ImageAlignmentButtons";
-
-// Register image resize module
-Quill.register("modules/imageResize", ImageResize);
 
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
@@ -80,24 +76,6 @@ const Write = () => {
         ["link", "image", "video"],
         ["clean"],
       ],
-    },
-    imageResize: {
-      parchment: Quill.import("parchment"),
-      modules: ["Resize", "DisplaySize", "Toolbar"],
-      handleStyles: {
-        backgroundColor: "#3b82f6",
-        border: "2px solid white",
-        width: "12px",
-        height: "12px",
-      },
-      displayStyles: {
-        backgroundColor: "#3b82f6",
-        border: "1px solid white",
-        color: "white",
-        padding: "4px 8px",
-        borderRadius: "4px",
-        fontSize: "12px",
-      },
     },
     clipboard: {
       matchVisual: false,
