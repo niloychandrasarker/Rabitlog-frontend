@@ -1,12 +1,8 @@
 import { useAuth, useUser } from "@clerk/clerk-react";
 import "react-quill-new/dist/quill.snow.css";
-import ReactQuill, { Quill } from "react-quill-new";
-import ImageResize from "quill-image-resize-module-react";
+import ReactQuill from "react-quill-new";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-
-// Register the ImageResize module
-Quill.register("modules/imageResize", ImageResize);
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -81,10 +77,6 @@ const Write = () => {
         ["clean"],
       ],
     },
-    imageResize: {
-      parchment: Quill.import("parchment"),
-      modules: ["Resize", "DisplaySize", "Toolbar"],
-    },
     clipboard: {
       matchVisual: false,
     },
@@ -104,7 +96,6 @@ const Write = () => {
     "blockquote",
     "code-block",
     "list",
-    "bullet",
     "indent",
     "direction",
     "align",
@@ -429,9 +420,11 @@ const Write = () => {
           {/* Rich Text Editor */}
           <div className="bg-white rounded-xl shadow-md p-4 sm:p-6">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-3">
-              <label className="block text-xs sm:text-sm font-medium text-gray-700">
-                Content *
-              </label>
+              <div>
+                <label className="block text-xs sm:text-sm font-medium text-gray-700">
+                  Content *
+                </label>
+              </div>
               <div className="flex gap-2 sm:gap-3 items-center flex-wrap">
                 <ImageAlignmentButtons quillRef={quillRef} />
                 <div className="hidden sm:block h-6 w-px bg-gray-300" />

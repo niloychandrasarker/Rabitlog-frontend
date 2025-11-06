@@ -11,67 +11,42 @@ body{
 
 /* Image Resize Module Styles */
 .ql-editor img {
-    cursor: default;
+    cursor: pointer;
     max-width: 100%;
     transition: box-shadow 0.2s;
-    user-select: none;
+    display: inline-block;
+    height: auto;
+    border: 2px solid transparent;
 }
 
 .ql-editor img:hover {
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+    border: 2px dashed rgba(59, 130, 246, 0.5);
 }
 
-.ql-editor img[draggable="true"] {
-    cursor: default;
+.ql-editor img.selected {
+    outline: 3px solid #3b82f6;
+    outline-offset: 2px;
 }
 
-/* Resize handles should have pointer cursor */
-.image-resize-handle,
-.image-resizer {
-    cursor: nwse-resize !important;
-    z-index: 100;
-}
-
-.image-resize-handle-ne,
-.image-resize-handle-sw {
-    cursor: nesw-resize !important;
-}
-
-.ql-editor .image-resize-wrapper {
-    display: inline-block;
-    position: relative;
-}
-
-.ql-editor .image-resize-handle {
+/* Resize handle styling */
+.img-resize-handle {
     position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: #3b82f6;
-    border: 1px solid #fff;
+    width: 14px;
+    height: 14px;
+    background: #3b82f6;
+    border: 2px solid white;
     border-radius: 50%;
     cursor: nwse-resize;
+    z-index: 10000;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    pointer-events: auto;
 }
 
-.ql-editor .image-resize-handle-nw {
-    top: -5px;
-    left: -5px;
-}
-
-.ql-editor .image-resize-handle-ne {
-    top: -5px;
-    right: -5px;
-    cursor: nesw-resize;
-}
-
-.ql-editor .image-resize-handle-sw {
-    bottom: -5px;
-    left: -5px;
-    cursor: nesw-resize;
-}
-
-.ql-editor .image-resize-handle-se {
-    bottom: -5px;
-    right: -5px;
+.img-resize-handle:hover {
+    background: #2563eb;
+    transform: scale(1.3);
+    transition: transform 0.2s;
 }
 
 /* React Quill Editor Improvements */
