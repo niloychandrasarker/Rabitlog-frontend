@@ -1,3 +1,45 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    width: 100vw;
+    overflow-x: hidden;
+    background: #e6e6ff;
+
+.ql-editor img,
+.ql-editor iframe {
+    max-width: 220px;
+
+    border-radius: 12px;
+    display: block;
+    margin: 16px auto;
+}
+
+.ql-editor iframe {
+    height: 220px;
+}
+}
+.animateButton{
+    animation-duration: 20000ms;
+}
+
+/* React Quill editor height tweak */
+.ql-editor {
+    border: none !important;
+    min-height: 320px; /* increase this value if you want it taller */
+    max-height: none;
+}
+.ql-container{
+    border: none !important;
+}
+
+/* Multi-line truncation utility (3 lines) */
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+}
