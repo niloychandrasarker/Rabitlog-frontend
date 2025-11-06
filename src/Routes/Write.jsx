@@ -166,8 +166,15 @@ const Write = () => {
             <option value="web-design">Web Design</option>
             <option value="development">Development</option>
             <option value="databases">Databases</option>
-            <option value="seo">Search Engines</option>
+            <option value="seo">SEO</option>
             <option value="marketing">Marketing</option>
+            <option value="ai-ml">AI & ML</option>
+            <option value="mobile">Mobile Apps</option>
+            <option value="cloud">Cloud</option>
+            <option value="devops">DevOps</option>
+            <option value="security">Security</option>
+            <option value="blockchain">Blockchain</option>
+            <option value="research">Research</option>
           </select>
         </div>
         <textarea

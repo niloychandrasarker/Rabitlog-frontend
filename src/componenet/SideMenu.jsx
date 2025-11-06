@@ -98,13 +98,55 @@ const SideMenu = () => {
           className="underline cursor-pointer"
           onClick={() => handleCategoryChange("seo")}
         >
-          Search Engines
+          SEO
         </span>
         <span
           className="underline cursor-pointer"
           onClick={() => handleCategoryChange("marketing")}
         >
           Marketing
+        </span>
+        <span
+          className="underline cursor-pointer"
+          onClick={() => handleCategoryChange("ai-ml")}
+        >
+          AI & ML
+        </span>
+        <span
+          className="underline cursor-pointer"
+          onClick={() => handleCategoryChange("mobile")}
+        >
+          Mobile Apps
+        </span>
+        <span
+          className="underline cursor-pointer"
+          onClick={() => handleCategoryChange("cloud")}
+        >
+          Cloud
+        </span>
+        <span
+          className="underline cursor-pointer"
+          onClick={() => handleCategoryChange("devops")}
+        >
+          DevOps
+        </span>
+        <span
+          className="underline cursor-pointer"
+          onClick={() => handleCategoryChange("security")}
+        >
+          Security
+        </span>
+        <span
+          className="underline cursor-pointer"
+          onClick={() => handleCategoryChange("blockchain")}
+        >
+          Blockchain
+        </span>
+        <span
+          className="underline cursor-pointer"
+          onClick={() => handleCategoryChange("research")}
+        >
+          Research
         </span>
       </div>
     </div>
