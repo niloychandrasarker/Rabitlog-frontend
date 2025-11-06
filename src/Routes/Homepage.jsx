@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import MainCategories from "../componenet/MainCategories";
 import FeaturedPosts from "../componenet/FeaturedPosts";
 import PostList from "../componenet/PostList";
+import TrendingPosts from "../componenet/TrendingPosts";
+import PopularPosts from "../componenet/PopularPosts";
 
 const Homepage = () => {
   return (
@@ -17,7 +19,8 @@ const Homepage = () => {
         {/* titles */}
         <div className="">
           <h1 className="text-gray-800 text-2xl md:text-5xl lg:text-6xl font-bold">
-            Discover, discuss, and redefine technology <br /> — one blog at a time
+            Discover, discuss, and redefine technology <br /> — one blog at a
+            time
           </h1>
           <p className="mt-8 text-md md:text-xl">
             Discover amazing articles, share your ideas, and connect with
@@ -67,10 +70,18 @@ const Homepage = () => {
       <MainCategories />
       {/* Feature Post */}
       <FeaturedPosts />
-      {/* Post List */}
-      <div>
-        <h1 className="my-8 text-2xl text-gray-600">Recent Posts</h1>
-        <PostList />
+      {/* MAIN CONTENT WITH SIDEBAR */}
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Post List */}
+        <div className="flex-1">
+          <h1 className="my-8 text-2xl text-gray-600">Recent Posts</h1>
+          <PostList />
+        </div>
+        {/* Sidebar */}
+        <div className="lg:w-80 flex-shrink-0 space-y-6">
+          <TrendingPosts />
+          <PopularPosts />
+        </div>
       </div>
     </div>
   );

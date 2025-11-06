@@ -10,19 +10,19 @@ import Write from "./Routes/Write.jsx";
 import LoginPage from "./Routes/LoginPage.jsx";
 import RegisterPage from "./Routes/RegisterPage.jsx";
 import MainLayout from "./layout/MainLayout.jsx";
+import TrendingPage from "./Routes/TrendingPage.jsx";
+import PopularPage from "./Routes/PopularPage.jsx";
+import AboutPage from "./Routes/AboutPage.jsx";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
-const queryClient = new QueryClient()
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient();
 
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {
-  throw new Error('Missing Publishable Key')
+  throw new Error("Missing Publishable Key");
 }
 
 const router = createBrowserRouter([
@@ -36,6 +36,18 @@ const router = createBrowserRouter([
       {
         path: "/posts",
         element: <PostListPage />,
+      },
+      {
+        path: "/trending",
+        element: <TrendingPage />,
+      },
+      {
+        path: "/popular",
+        element: <PopularPage />,
+      },
+      {
+        path: "/about",
+        element: <AboutPage />,
       },
       {
         path: "/:slug",
@@ -60,10 +72,10 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-     <QueryClientProvider client={queryClient}>
-       <RouterProvider router={router} />
-       <ToastContainer position="bottom-right"/>
-     </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ToastContainer position="bottom-right" />
+      </QueryClientProvider>
     </ClerkProvider>
   </StrictMode>
 );
