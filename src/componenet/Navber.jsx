@@ -170,6 +170,7 @@ const Navber = () => {
               elements: {
                 avatarBox:
                   "w-10 h-10 ring-2 ring-blue-200 hover:ring-blue-400 transition-all shadow-md",
+                userButtonPopoverFooter: "hidden",
               },
             }}
           />
@@ -209,28 +210,30 @@ const Navber = () => {
 
       {/* Mobile Menu - Dropdown Style (No Overlay, No Drawer) */}
       <div
-        className={`md:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-2xl transition-all duration-300 ease-out overflow-hidden ${
-          open ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+        className={`md:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-2xl transition-all duration-300 ease-out ${
+          open
+            ? "max-h-[calc(100vh-4rem)] opacity-100 overflow-y-auto"
+            : "max-h-0 opacity-0 overflow-hidden"
         }`}
       >
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col">
           {/* Menu Header */}
-          <div className="px-6 py-5 border-b border-gray-100 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50">
+          <div className="px-6 py-5 border-b border-gray-100 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 sticky top-0 z-10">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <h3 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   Menu
                 </h3>
-                <p className="text-sm text-gray-600 mt-1">Explore & Create</p>
+                <p className="text-xs text-gray-600 mt-1">Explore & Create</p>
               </div>
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
-                <span className="text-2xl">🚀</span>
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <span className="text-xl">🚀</span>
               </div>
             </div>
           </div>
 
           {/* Menu Links */}
-          <div className="flex-1 overflow-y-auto px-4 py-6">
+          <div className="px-4 py-6">
             {/* Main Navigation */}
             <div className="space-y-2 mb-6">
               {navLinks.map((link) => (
@@ -250,10 +253,10 @@ const Navber = () => {
                         : "bg-white group-hover:bg-gradient-to-br group-hover:from-blue-100 group-hover:to-purple-100"
                     }`}
                   >
-                    <span className="text-xl sm:text-2xl">{link.icon}</span>
+                    <span className="text-lg">{link.icon}</span>
                   </div>
                   <div className="flex-1">
-                    <span className="font-bold text-base block leading-tight">
+                    <span className="font-bold text-sm block leading-tight">
                       {link.label}
                     </span>
                     <span
@@ -311,7 +314,7 @@ const Navber = () => {
                     </svg>
                   </div>
                   <div className="flex-1">
-                    <span className="block text-lg leading-tight">
+                    <span className="block text-base leading-tight">
                       Post Blog
                     </span>
                     <span className="text-xs text-white/80">
@@ -355,7 +358,7 @@ const Navber = () => {
                     </svg>
                   </div>
                   <div className="flex-1">
-                    <span className="block text-lg leading-tight">
+                    <span className="block text-base leading-tight">
                       Login First
                     </span>
                     <span className="text-xs text-white/80">
@@ -374,17 +377,17 @@ const Navber = () => {
                 </h4>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="bg-white rounded-xl p-3 shadow-sm hover:shadow-md transition-shadow">
-                    <div className="text-xl sm:text-2xl font-bold text-blue-600">
+                    <div className="text-lg font-bold text-blue-600">
                       {userStats?.postCount ?? (
-                        <span className="text-base sm:text-lg">...</span>
+                        <span className="text-base">...</span>
                       )}
                     </div>
                     <div className="text-xs text-gray-500">Posts</div>
                   </div>
                   <div className="bg-white rounded-xl p-3 shadow-sm hover:shadow-md transition-shadow">
-                    <div className="text-xl sm:text-2xl font-bold text-purple-600">
+                    <div className="text-lg font-bold text-purple-600">
                       {userStats?.totalViews ?? (
-                        <span className="text-base sm:text-lg">...</span>
+                        <span className="text-base">...</span>
                       )}
                     </div>
                     <div className="text-xs text-gray-500">Views</div>
@@ -398,9 +401,9 @@ const Navber = () => {
           <div className="px-6 py-4 border-t border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100">
             <SignedOut>
               <Link to="/login" onClick={() => setOpen(false)}>
-                <button className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                <button className="w-full py-3 px-5 rounded-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-semibold text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
                   <svg
-                    className="w-5 h-5"
+                    className="w-4 h-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -417,10 +420,16 @@ const Navber = () => {
               </Link>
             </SignedOut>
             <SignedIn>
+              {/* User Info */}
               <div className="flex items-center gap-3 p-3 bg-white rounded-xl shadow-sm">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">
-                  {user?.username?.charAt(0)?.toUpperCase() || "U"}
-                </div>
+                <UserButton
+                  appearance={{
+                    elements: {
+                      avatarBox: "w-10 h-10",
+                      userButtonPopoverFooter: "hidden",
+                    },
+                  }}
+                />
                 <div className="flex-1 min-w-0">
                   <p className="font-bold text-sm text-gray-800 truncate">
                     {user?.username || "User"}

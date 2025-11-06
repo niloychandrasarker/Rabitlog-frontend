@@ -1,8 +1,12 @@
 import { useAuth, useUser } from "@clerk/clerk-react";
 import "react-quill-new/dist/quill.snow.css";
 import ReactQuill, { Quill } from "react-quill-new";
+import ImageResize from "quill-image-resize-module-react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
+
+// Register the ImageResize module
+Quill.register("modules/imageResize", ImageResize);
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -76,6 +80,10 @@ const Write = () => {
         ["link", "image", "video"],
         ["clean"],
       ],
+    },
+    imageResize: {
+      parchment: Quill.import("parchment"),
+      modules: ["Resize", "DisplaySize", "Toolbar"],
     },
     clipboard: {
       matchVisual: false,
@@ -232,36 +240,36 @@ const Write = () => {
   return (
     <div className="min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-80px)] pb-8">
       {/* Header with tabs */}
-      <div className="flex items-center justify-between mb-6 border-b pb-4">
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4 sm:mb-6 border-b pb-3 sm:pb-4">
+        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800">
           {showPreview
             ? "Preview Your Post"
             : editPostSlug
             ? "Edit Post"
             : "Create a New Post"}
         </h1>
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full sm:w-auto">
           <button
             type="button"
             onClick={() => setShowPreview(false)}
-            className={`px-6 py-2 rounded-lg font-medium transition-colors ${
+            className={`flex-1 sm:flex-none px-4 sm:px-6 py-2 rounded-lg font-medium text-sm sm:text-base transition-colors ${
               !showPreview
                 ? "bg-blue-800 text-white"
                 : "bg-gray-200 text-gray-700 hover:bg-gray-300"
             }`}
           >
-            ✏️ Editor
+            <span className="hidden sm:inline">✏️ </span>Editor
           </button>
           <button
             type="button"
             onClick={() => setShowPreview(true)}
-            className={`px-6 py-2 rounded-lg font-medium transition-colors ${
+            className={`flex-1 sm:flex-none px-4 sm:px-6 py-2 rounded-lg font-medium text-sm sm:text-base transition-colors ${
               showPreview
                 ? "bg-blue-800 text-white"
                 : "bg-gray-200 text-gray-700 hover:bg-gray-300"
             }`}
           >
-            👁️ Preview
+            <span className="hidden sm:inline">👁️ </span>Preview
           </button>
         </div>
       </div>
@@ -302,18 +310,18 @@ const Write = () => {
         </div>
       ) : (
         /* Editor Mode */
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-6">
           {/* Cover Image */}
-          <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="bg-white rounded-xl shadow-md p-4 sm:p-6">
             <label className="block text-sm font-medium text-gray-700 mb-3">
               Cover Image
             </label>
             <Upload type="image" setProgress={setProgress} setData={setCover}>
               <button
                 type="button"
-                className="px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 transition-colors text-gray-600 hover:text-blue-600"
+                className="w-full sm:w-auto px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 transition-colors text-gray-600 hover:text-blue-600 text-sm sm:text-base"
               >
-                📷 {cover?.url ? "Change Cover Image" : "Add Cover Image"}
+                📷 {cover?.url ? "Change Cover" : "Add Cover"}
               </button>
             </Upload>
             {cover?.url && (
@@ -321,12 +329,12 @@ const Write = () => {
                 <img
                   src={cover.url}
                   alt="Cover preview"
-                  className="h-64 w-full object-cover rounded-lg"
+                  className="h-48 sm:h-64 w-full object-cover rounded-lg"
                 />
                 <button
                   type="button"
                   onClick={() => setCover(null)}
-                  className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 transition-colors"
+                  className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-600 transition-colors text-sm"
                 >
                   ✕
                 </button>
@@ -335,32 +343,34 @@ const Write = () => {
           </div>
 
           {/* Title */}
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <label className="block text-sm font-medium text-gray-700 mb-3">
+          <div className="bg-white rounded-xl shadow-md p-4 sm:p-6">
+            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">
               Post Title *
             </label>
             <input
-              className="w-full text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-transparent outline-none border-b-2 border-gray-200 focus:border-blue-500 transition-colors pb-2"
+              className="w-full text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold bg-transparent outline-none border-b-2 border-gray-200 focus:border-blue-500 transition-colors pb-2"
               type="text"
               placeholder="Enter your awesome title..."
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
             {formErrors.title && (
-              <p className="text-sm text-red-500 mt-2">{formErrors.title}</p>
+              <p className="text-xs sm:text-sm text-red-500 mt-2">
+                {formErrors.title}
+              </p>
             )}
           </div>
 
           {/* Category & Description */}
-          <div className="bg-white rounded-xl shadow-md p-6 grid md:grid-cols-2 gap-6">
+          <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 grid gap-4 sm:gap-6 md:grid-cols-2">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">
                 Category
               </label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full p-3 rounded-lg border-2 border-gray-200 focus:border-blue-500 outline-none transition-colors"
+                className="w-full p-2.5 sm:p-3 rounded-lg border-2 border-gray-200 focus:border-blue-500 outline-none transition-colors text-sm sm:text-base"
               >
                 <option value="general">📝 General</option>
                 <option value="web-design">🎨 Web Design</option>
@@ -378,11 +388,11 @@ const Write = () => {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">
                 Word Count
               </label>
-              <div className="p-3 rounded-lg bg-gray-50 border-2 border-gray-200">
-                <span className="text-2xl font-bold text-blue-600">
+              <div className="p-2.5 sm:p-3 rounded-lg bg-gray-50 border-2 border-gray-200">
+                <span className="text-xl sm:text-2xl font-bold text-blue-600">
                   {
                     value
                       .replace(/<[^>]*>/g, "")
@@ -392,14 +402,16 @@ const Write = () => {
                       .filter(Boolean).length
                   }
                 </span>
-                <span className="text-gray-600 ml-2">words</span>
+                <span className="text-gray-600 ml-2 text-sm sm:text-base">
+                  words
+                </span>
               </div>
             </div>
           </div>
 
           {/* Description */}
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <label className="block text-sm font-medium text-gray-700 mb-3">
+          <div className="bg-white rounded-xl shadow-md p-4 sm:p-6">
+            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">
               Short Description
             </label>
             <textarea
@@ -415,18 +427,18 @@ const Write = () => {
           </div>
 
           {/* Rich Text Editor */}
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <div className="flex justify-between items-center mb-3">
-              <label className="block text-sm font-medium text-gray-700">
+          <div className="bg-white rounded-xl shadow-md p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-3">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700">
                 Content *
               </label>
-              <div className="flex gap-3 items-center">
+              <div className="flex gap-2 sm:gap-3 items-center flex-wrap">
                 <ImageAlignmentButtons quillRef={quillRef} />
-                <div className="h-6 w-px bg-gray-300" />
+                <div className="hidden sm:block h-6 w-px bg-gray-300" />
                 <Upload type="image" setProgress={setProgress} setData={setImg}>
                   <button
                     type="button"
-                    className="px-3 py-1 text-sm bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors"
+                    className="px-2.5 sm:px-3 py-1 text-xs sm:text-sm bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors"
                   >
                     🌆 Image
                   </button>
@@ -438,26 +450,29 @@ const Write = () => {
                 >
                   <button
                     type="button"
-                    className="px-3 py-1 text-sm bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition-colors"
+                    className="px-2.5 sm:px-3 py-1 text-xs sm:text-sm bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition-colors"
                   >
                     ▶️ Video
                   </button>
                 </Upload>
               </div>
             </div>
-            <ReactQuill
-              value={value}
-              onChange={setValue}
-              theme="snow"
-              modules={modules}
-              formats={formats}
-              className="bg-white rounded-lg"
-              style={{ height: "400px", marginBottom: "50px" }}
-              ref={quillRef}
-              placeholder="Start writing your amazing content here..."
-            />
+            <div className="min-h-[300px] sm:min-h-[400px]">
+              <ReactQuill
+                value={value}
+                onChange={setValue}
+                theme="snow"
+                modules={modules}
+                formats={formats}
+                className="bg-white rounded-lg h-full"
+                ref={quillRef}
+                placeholder="Start writing your amazing content here..."
+              />
+            </div>
             {formErrors.content && (
-              <p className="text-sm text-red-500 mt-2">{formErrors.content}</p>
+              <p className="text-xs sm:text-sm text-red-500 mt-2">
+                {formErrors.content}
+              </p>
             )}
           </div>
 
@@ -478,7 +493,7 @@ const Write = () => {
           )}
 
           {/* Submit Button */}
-          <div className="flex justify-end gap-4">
+          <div className="flex flex-col sm:flex-row justify-end gap-3 sm:gap-4">
             <button
               type="button"
               onClick={() => {
@@ -489,14 +504,14 @@ const Write = () => {
                   setCover(null);
                 }
               }}
-              className="px-6 py-3 rounded-lg font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 transition-colors"
+              className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium text-sm sm:text-base text-gray-700 bg-gray-200 hover:bg-gray-300 transition-colors"
             >
               Discard
             </button>
             <button
               type="submit"
               disabled={mutation.isPending || (0 < progress && progress < 100)}
-              className="px-8 py-3 rounded-lg font-medium text-white bg-blue-800 hover:bg-blue-900 transition-colors disabled:bg-blue-400 disabled:cursor-not-allowed flex items-center gap-2"
+              className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-medium text-sm sm:text-base text-white bg-blue-800 hover:bg-blue-900 transition-colors disabled:bg-blue-400 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {mutation.isPending ? (
                 <>
