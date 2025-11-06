@@ -12,10 +12,10 @@ const AboutPage = () => {
 
       {/* Header */}
       <div className="mb-12 text-center">
-        <h1 className="text-5xl font-bold text-gray-800 mb-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">
           About Rabitlog 📚
         </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
           A community-driven platform for technology enthusiasts to share
           knowledge, insights, and experiences
         </p>
@@ -25,8 +25,10 @@ const AboutPage = () => {
       <div className="max-w-4xl mx-auto space-y-12">
         {/* Mission Section */}
         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl shadow-md p-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">Our Mission</h2>
-          <p className="text-lg text-gray-700 leading-relaxed">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">
+            Our Mission
+          </h2>
+          <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
             Rabitlog is dedicated to creating a vibrant community where
             developers, designers, and tech enthusiasts can share their
             knowledge and learn from each other. We believe in the power of
@@ -38,8 +40,8 @@ const AboutPage = () => {
         {/* Features Grid */}
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-            <div className="text-5xl mb-4">✍️</div>
-            <h3 className="font-bold text-xl mb-3 text-gray-800">
+            <div className="text-3xl sm:text-4xl md:text-5xl mb-4">✍️</div>
+            <h3 className="font-bold text-lg sm:text-xl mb-3 text-gray-800">
               Write & Share
             </h3>
             <p className="text-gray-600">
@@ -48,8 +50,8 @@ const AboutPage = () => {
             </p>
           </div>
           <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-            <div className="text-5xl mb-4">🌟</div>
-            <h3 className="font-bold text-xl mb-3 text-gray-800">
+            <div className="text-3xl sm:text-4xl md:text-5xl mb-4">🌟</div>
+            <h3 className="font-bold text-lg sm:text-xl mb-3 text-gray-800">
               Learn & Grow
             </h3>
             <p className="text-gray-600">
@@ -58,8 +60,10 @@ const AboutPage = () => {
             </p>
           </div>
           <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-            <div className="text-5xl mb-4">🤝</div>
-            <h3 className="font-bold text-xl mb-3 text-gray-800">Connect</h3>
+            <div className="text-3xl sm:text-4xl md:text-5xl mb-4">🤝</div>
+            <h3 className="font-bold text-lg sm:text-xl mb-3 text-gray-800">
+              Connect
+            </h3>
             <p className="text-gray-600">
               Join discussions, save your favorite posts, and build your
               professional network in the tech community.
@@ -69,7 +73,7 @@ const AboutPage = () => {
 
         {/* Topics Section */}
         <div className="bg-white p-8 rounded-xl shadow-md">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center">
             Topics We Cover
           </h2>
           <div className="flex flex-wrap gap-3 justify-center">
@@ -100,23 +104,31 @@ const AboutPage = () => {
         {/* Stats Section */}
         <div className="grid md:grid-cols-3 gap-6 text-center">
           <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-8 rounded-xl shadow-lg">
-            <div className="text-4xl font-bold mb-2">1000+</div>
-            <div className="text-lg">Articles Published</div>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+              1000+
+            </div>
+            <div className="text-base sm:text-lg">Articles Published</div>
           </div>
           <div className="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white p-8 rounded-xl shadow-lg">
-            <div className="text-4xl font-bold mb-2">500+</div>
-            <div className="text-lg">Active Writers</div>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+              500+
+            </div>
+            <div className="text-base sm:text-lg">Active Writers</div>
           </div>
           <div className="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-8 rounded-xl shadow-lg">
-            <div className="text-4xl font-bold mb-2">10K+</div>
-            <div className="text-lg">Monthly Readers</div>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+              10K+
+            </div>
+            <div className="text-base sm:text-lg">Monthly Readers</div>
           </div>
         </div>
 
         {/* CTA Section */}
         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-12 rounded-xl shadow-xl text-center">
-          <h2 className="text-3xl font-bold mb-4">Join Our Community Today!</h2>
-          <p className="text-lg mb-6 opacity-90">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">
+            Join Our Community Today!
+          </h2>
+          <p className="text-base sm:text-lg mb-6 opacity-90">
             Start writing, sharing, and connecting with fellow tech enthusiasts
           </p>
           <Link

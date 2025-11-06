@@ -1,5 +1,5 @@
 import PostListItem from "./PostListItem";
-import { useInfiniteQuery} from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams, Link } from "react-router-dom";
@@ -67,12 +67,12 @@ const PostList = () => {
     return (
       <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
         <div className="flex items-center gap-3">
-          <span className="text-3xl">⚠️</span>
+          <span className="text-2xl sm:text-3xl">⚠️</span>
           <div>
-            <h3 className="text-lg font-bold text-red-800">
+            <h3 className="text-base sm:text-lg font-bold text-red-800">
               Oops! Something went wrong
             </h3>
-            <p className="text-red-600 mt-1">
+            <p className="text-sm sm:text-base text-red-600 mt-1">
               Unable to load posts. Please try again later.
             </p>
           </div>
@@ -86,8 +86,8 @@ const PostList = () => {
   if (allPosts.length === 0) {
     return (
       <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl shadow-md p-12 text-center">
-        <div className="text-6xl mb-4">📭</div>
-        <h3 className="text-2xl font-bold text-gray-800 mb-2">
+        <div className="text-4xl sm:text-5xl md:text-6xl mb-4">📭</div>
+        <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
           No Posts Found
         </h3>
         <p className="text-gray-600 mb-6">
@@ -121,11 +121,11 @@ const PostList = () => {
       }
       endMessage={
         <div className="text-center py-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl mt-6">
-          <span className="text-4xl mb-3 block">🎉</span>
-          <p className="text-lg font-semibold text-gray-800">
+          <span className="text-3xl sm:text-4xl mb-3 block">🎉</span>
+          <p className="text-base sm:text-lg font-semibold text-gray-800">
             You&apos;ve reached the end!
           </p>
-          <p className="text-gray-600 mt-1">
+          <p className="text-sm sm:text-base text-gray-600 mt-1">
             That&apos;s all the posts for now. Check back later for more.
           </p>
         </div>

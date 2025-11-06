@@ -31,7 +31,7 @@ const SinglePostPage = () => {
       {/* Details */}
       <div className="flex gap-8">
         <div className="lg:w-3/5 flex flex-col gap-8">
-          <h1 className=" text-xl md:text-3xl xl:text-4xl 2xl:text-5xl font-bold">
+          <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">
             {data.title}
           </h1>
 

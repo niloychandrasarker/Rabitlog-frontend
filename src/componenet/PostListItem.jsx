@@ -63,7 +63,7 @@ const PostListItem = ({ post }) => {
         {/* Title */}
         <Link
           to={`/${post.slug}`}
-          className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight"
         >
           {post.title}
         </Link>

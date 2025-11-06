@@ -68,7 +68,9 @@ const TrendingPosts = () => {
           </div>
         </div>
         <div className="text-center py-8 bg-white rounded-lg">
-          <span className="text-5xl mb-3 block">📊</span>
+          <span className="text-3xl sm:text-4xl md:text-5xl mb-3 block">
+            📊
+          </span>
           <p className="text-gray-500 text-sm">No trending posts yet.</p>
           <p className="text-gray-400 text-xs mt-1">Check back soon!</p>
         </div>

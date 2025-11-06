@@ -250,7 +250,7 @@ const Navber = () => {
                         : "bg-white group-hover:bg-gradient-to-br group-hover:from-blue-100 group-hover:to-purple-100"
                     }`}
                   >
-                    <span className="text-2xl">{link.icon}</span>
+                    <span className="text-xl sm:text-2xl">{link.icon}</span>
                   </div>
                   <div className="flex-1">
                     <span className="font-bold text-base block leading-tight">
@@ -374,17 +374,17 @@ const Navber = () => {
                 </h4>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="bg-white rounded-xl p-3 shadow-sm hover:shadow-md transition-shadow">
-                    <div className="text-2xl font-bold text-blue-600">
+                    <div className="text-xl sm:text-2xl font-bold text-blue-600">
                       {userStats?.postCount ?? (
-                        <span className="text-lg">...</span>
+                        <span className="text-base sm:text-lg">...</span>
                       )}
                     </div>
                     <div className="text-xs text-gray-500">Posts</div>
                   </div>
                   <div className="bg-white rounded-xl p-3 shadow-sm hover:shadow-md transition-shadow">
-                    <div className="text-2xl font-bold text-purple-600">
+                    <div className="text-xl sm:text-2xl font-bold text-purple-600">
                       {userStats?.totalViews ?? (
-                        <span className="text-lg">...</span>
+                        <span className="text-base sm:text-lg">...</span>
                       )}
                     </div>
                     <div className="text-xs text-gray-500">Views</div>

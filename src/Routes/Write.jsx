@@ -233,7 +233,7 @@ const Write = () => {
     <div className="min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-80px)] pb-8">
       {/* Header with tabs */}
       <div className="flex items-center justify-between mb-6 border-b pb-4">
-        <h1 className="text-3xl font-bold text-gray-800">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">
           {showPreview
             ? "Preview Your Post"
             : editPostSlug
@@ -282,7 +282,7 @@ const Write = () => {
                 {category.replace("-", " ").toUpperCase()}
               </span>
             </div>
-            <h1 className="text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
               {title || "Untitled Post"}
             </h1>
             {desc && (
@@ -340,7 +340,7 @@ const Write = () => {
               Post Title *
             </label>
             <input
-              className="w-full text-4xl font-bold bg-transparent outline-none border-b-2 border-gray-200 focus:border-blue-500 transition-colors pb-2"
+              className="w-full text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-transparent outline-none border-b-2 border-gray-200 focus:border-blue-500 transition-colors pb-2"
               type="text"
               placeholder="Enter your awesome title..."
               value={title}
