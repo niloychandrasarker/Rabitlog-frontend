@@ -1,6 +1,6 @@
 import { useAuth, useUser } from "@clerk/clerk-react";
 import "react-quill-new/dist/quill.snow.css";
-import ReactQuill from "react-quill-new";
+import ReactQuill, { Quill } from "react-quill-new";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
@@ -8,6 +8,10 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Upload from "../componenet/Upload";
 import ImageAlignmentButtons from "../componenet/ImageAlignmentButtons";
+import BlotFormatter from "quill-blot-formatter";
+
+// Register BlotFormatter module
+Quill.register("modules/blotFormatter", BlotFormatter);
 
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
@@ -77,6 +81,7 @@ const Write = () => {
         ["clean"],
       ],
     },
+    blotFormatter: {},
     clipboard: {
       matchVisual: false,
     },
@@ -424,6 +429,9 @@ const Write = () => {
                 <label className="block text-xs sm:text-sm font-medium text-gray-700">
                   Content *
                 </label>
+                <p className="text-xs text-gray-500 mt-1">
+                  💡 Click image to see resize handles
+                </p>
               </div>
               <div className="flex gap-2 sm:gap-3 items-center flex-wrap">
                 <ImageAlignmentButtons quillRef={quillRef} />
