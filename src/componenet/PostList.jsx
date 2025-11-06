@@ -1,5 +1,5 @@
 import PostListItem from "./PostListItem";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery} from "@tanstack/react-query";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams, Link } from "react-router-dom";

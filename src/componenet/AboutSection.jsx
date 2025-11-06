@@ -8,7 +8,7 @@ const AboutSection = () => {
         </h2>
         <div className="space-y-4 text-gray-700">
           <p className="text-lg leading-relaxed">
-            Welcome to our technology blog platform! We're a community of
+            Welcome to our technology blog platform! Were a community of
             passionate developers, designers, and tech enthusiasts sharing
             knowledge and insights about the ever-evolving world of technology.
           </p>
