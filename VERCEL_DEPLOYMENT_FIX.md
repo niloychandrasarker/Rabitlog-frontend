@@ -3,6 +3,7 @@
 ## Issue: Peer Dependency Conflicts
 
 The deployment error occurs because:
+
 1. Using React 19 RC (release candidate) which is not stable
 2. `@imagekit/react` package conflicts with React 19
 3. Duplicate ImageKit packages installed
@@ -10,6 +11,7 @@ The deployment error occurs because:
 ## Solution Applied
 
 ### 1. Updated `package.json`
+
 - ✅ Downgraded React from 19.0.0-rc to stable 18.3.1
 - ✅ Removed duplicate `@imagekit/react` package
 - ✅ Kept only `imagekitio-react` which works with React 18
@@ -17,10 +19,12 @@ The deployment error occurs because:
 - ✅ Updated React types to stable versions
 
 ### 2. Created `.npmrc` file
+
 - ✅ Added `legacy-peer-deps=true` to handle peer dependency warnings
 - ✅ This file tells npm to ignore peer dependency conflicts
 
 ### 3. Updated `vercel.json`
+
 - ✅ Added custom build command with `--legacy-peer-deps` flag
 - ✅ Ensures Vercel uses the same installation method
 
@@ -47,7 +51,9 @@ npm run preview
 ## Vercel Deployment Steps
 
 ### Option 1: Redeploy (Recommended)
+
 1. **Commit changes**:
+
    ```bash
    git add .
    git commit -m "Fix: React version conflicts for Vercel deployment"
@@ -62,15 +68,18 @@ npm run preview
    - Verify build succeeds
 
 ### Option 2: Manual Override in Vercel Dashboard
+
 If auto-deploy fails, configure manually:
 
 1. Go to **Project Settings** → **General**
 2. **Build & Development Settings**:
+
    - Build Command: `npm install --legacy-peer-deps && npm run build`
    - Output Directory: `dist`
    - Install Command: `npm install --legacy-peer-deps`
 
 3. **Environment Variables** (if not set):
+
    ```
    VITE_API_URL=https://your-backend.vercel.app
    VITE_CLERK_PUBLISHABLE_KEY=pk_test_xxxxx
@@ -83,6 +92,7 @@ If auto-deploy fails, configure manually:
 ## Expected Results
 
 ### Before Fix:
+
 ```
 ❌ npm error Could not resolve dependency
 ❌ Conflicting peer dependency: react@19.2.0
@@ -90,6 +100,7 @@ If auto-deploy fails, configure manually:
 ```
 
 ### After Fix:
+
 ```
 ✅ Installing dependencies...
 ✅ Building application...
@@ -118,10 +129,12 @@ Once deployed, test these URLs:
 ### If Build Still Fails:
 
 1. **Check Vercel Build Logs**:
+
    - Look for specific error messages
    - Check which dependency is causing issues
 
 2. **Clear Vercel Cache**:
+
    - Go to Deployments → Latest → ... (menu) → Redeploy
    - Check "Clear build cache"
 
@@ -135,10 +148,12 @@ Once deployed, test these URLs:
 ### If App Doesn't Load:
 
 1. **Check Environment Variables**:
-   - Verify all VITE_* variables are set
+
+   - Verify all VITE\_\* variables are set
    - URLs should not have trailing slashes
 
 2. **Check API Connection**:
+
    - Open browser console
    - Look for CORS or 404 errors
    - Verify backend URL is correct
@@ -150,6 +165,7 @@ Once deployed, test these URLs:
 ## React 19 Note
 
 If you specifically need React 19 features:
+
 - Wait for stable release
 - Or use `--force` flag (not recommended for production)
 - Currently React 18.3.1 is production-ready and recommended
@@ -157,6 +173,7 @@ If you specifically need React 19 features:
 ## Support
 
 If issues persist:
+
 1. Share Vercel deployment logs
 2. Check package versions locally vs Vercel
 3. Verify all dependencies are compatible with React 18
