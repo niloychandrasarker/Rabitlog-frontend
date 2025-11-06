@@ -8,12 +8,5 @@ export default defineConfig({
     commonjsOptions: {
       transformMixedEsModules: true,
     },
-    rollupOptions: {
-      external: [],
-    },
-  },
-  optimizeDeps: {
-    include: ["react-quill-new", "quill-blot-formatter"],
-    exclude: [],
   },
 });

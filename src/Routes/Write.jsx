@@ -1,6 +1,6 @@
 import { useAuth, useUser } from "@clerk/clerk-react";
 import "react-quill-new/dist/quill.snow.css";
-import ReactQuill, { Quill } from "react-quill-new";
+import ReactQuill from "react-quill-new";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
@@ -8,10 +8,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Upload from "../componenet/Upload";
 import ImageAlignmentButtons from "../componenet/ImageAlignmentButtons";
-import BlotFormatter from "quill-blot-formatter";
-
-// Register BlotFormatter module
-Quill.register("modules/blotFormatter", BlotFormatter);
 
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
@@ -29,6 +25,36 @@ const Write = () => {
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("general");
   const quillRef = useRef(null);
+
+  // Add simple image width control
+  useEffect(() => {
+    const handleImageClick = (e) => {
+      if (e.target.tagName === "IMG" && e.target.closest(".ql-editor")) {
+        const img = e.target;
+        const currentWidth = img.style.width || img.offsetWidth + "px";
+        const newWidth = prompt(
+          `Current width: ${parseInt(
+            currentWidth
+          )}px\n\nEnter new width:\n- Number (e.g., 400) for pixels\n- Percentage (e.g., 50%)\n- Leave empty to keep current`,
+          parseInt(currentWidth)
+        );
+
+        if (newWidth && newWidth.trim()) {
+          const value = newWidth.trim();
+          img.style.width = value.includes("%") ? value : value + "px";
+          img.style.height = "auto";
+          img.style.maxWidth = "100%";
+        }
+      }
+    };
+
+    // Add global click listener
+    document.addEventListener("click", handleImageClick);
+
+    return () => {
+      document.removeEventListener("click", handleImageClick);
+    };
+  }, []);
 
   // Fetch post data if editing
   const { data: existingPost } = useQuery({
@@ -81,7 +107,6 @@ const Write = () => {
         ["clean"],
       ],
     },
-    blotFormatter: {},
     clipboard: {
       matchVisual: false,
     },
@@ -430,7 +455,7 @@ const Write = () => {
                   Content *
                 </label>
                 <p className="text-xs text-gray-500 mt-1">
-                  💡 Click image to see resize handles
+                  💡 Click any image to resize it
                 </p>
               </div>
               <div className="flex gap-2 sm:gap-3 items-center flex-wrap">
