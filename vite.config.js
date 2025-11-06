@@ -10,6 +10,11 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ["react-quill-new", "quill-image-resize-module-react"],
+    include: ["react-quill-new", "quill-blot-formatter"],
+  },
+  resolve: {
+    alias: {
+      quill: "react-quill-new/node_modules/quill",
+    },
   },
 });
