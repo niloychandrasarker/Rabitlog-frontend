@@ -63,10 +63,13 @@ const SinglePostPage = () => {
       {/* content */}
       <div className="flex flex-col md:flex-row gap-12 justify-between">
         {/* text */}
-        <div
-          className="lg:text-lg flex flex-col gap-6 text-justify"
-          dangerouslySetInnerHTML={{ __html: contentHtml }}
-        />
+        <div className="flex-1  rounded-xl ">
+          <div
+            className="ql-editor"
+            style={{ border: "none", padding: "0" }}
+            dangerouslySetInnerHTML={{ __html: contentHtml }}
+          />
+        </div>
         {/* menu */}
         <div className="px-4 h-max sticky top-8">
           <h1 className="mb-4 text-sm font-medium">Author</h1>
@@ -95,7 +98,7 @@ const SinglePostPage = () => {
             </div>
           </div>
 
-          <PostMenuAction post={data}/>
+          <PostMenuAction post={data} />
           <h1 className="mt-8 mb-4 text-sm font-medium">Categories</h1>
           <div className="flex flex-col gap-2 text-sm">
             <Link to="/" className="underline">
@@ -121,7 +124,7 @@ const SinglePostPage = () => {
           <Search />
         </div>
       </div>
-      <Comments postId={data._id}/>
+      <Comments postId={data._id} />
     </div>
   );
 };

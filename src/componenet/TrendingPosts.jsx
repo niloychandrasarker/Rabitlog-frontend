@@ -18,12 +18,32 @@ const TrendingPosts = () => {
 
   if (isPending) {
     return (
-      <div className="bg-white rounded-xl shadow-md p-6">
-        <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-          <span className="text-2xl">🔥</span>
-          Trending Now
-        </h2>
-        <div className="text-gray-500">Loading...</div>
+      <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl shadow-lg p-6 border border-orange-100">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold flex items-center gap-3">
+            <span className="text-3xl animate-pulse">🔥</span>
+            <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+              Trending Now
+            </span>
+          </h2>
+          <div className="px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded-full">
+            HOT
+          </div>
+        </div>
+        <div className="space-y-3">
+          {[1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="animate-pulse flex gap-3 p-3 bg-white rounded-lg"
+            >
+              <div className="w-8 h-8 bg-gray-200 rounded-full flex-shrink-0" />
+              <div className="flex-1 space-y-2">
+                <div className="h-4 bg-gray-200 rounded w-3/4" />
+                <div className="h-3 bg-gray-200 rounded w-1/2" />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
@@ -36,52 +56,146 @@ const TrendingPosts = () => {
 
   if (posts.length === 0) {
     return (
-      <div className="bg-white rounded-xl shadow-md p-6">
-        <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-          <span className="text-2xl">🔥</span>
-          Trending Now
-        </h2>
-        <div className="text-gray-500 text-sm text-center py-4">
-          No trending posts yet. Check back soon!
+      <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl shadow-lg p-6 border border-orange-100">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold flex items-center gap-3">
+            <span className="text-3xl">🔥</span>
+            <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+              Trending Now
+            </span>
+          </h2>
+          <div className="px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded-full">
+            HOT
+          </div>
+        </div>
+        <div className="text-center py-8 bg-white rounded-lg">
+          <span className="text-5xl mb-3 block">📊</span>
+          <p className="text-gray-500 text-sm">No trending posts yet.</p>
+          <p className="text-gray-400 text-xs mt-1">Check back soon!</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6">
-      <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-        <span className="text-2xl">🔥</span>
-        Trending Now
-      </h2>
-      <div className="space-y-4">
+    <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 border border-orange-100">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-bold flex items-center gap-3">
+          <span className="text-3xl">🔥</span>
+          <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+            Trending Now
+          </span>
+        </h2>
+        <div className="px-3 py-1 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold rounded-full shadow-md">
+          HOT
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="h-1 bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 rounded-full mb-6" />
+
+      {/* Posts List */}
+      <div className="space-y-3">
         {posts.map((post, index) => (
           <Link
             key={post._id}
             to={`/${post.slug}`}
-            className="flex gap-3 group hover:bg-gray-50 p-2 rounded-lg transition-colors"
+            className="flex gap-4 group p-3 rounded-xl transition-all duration-300 bg-white hover:bg-gradient-to-r hover:from-orange-50 hover:to-white hover:shadow-md border border-transparent hover:border-orange-200"
           >
-            <span className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-orange-400 to-red-500 text-white rounded-full flex items-center justify-center font-bold text-sm">
-              {index + 1}
-            </span>
+            {/* Ranking Badge */}
+            <div className="flex-shrink-0">
+              <div
+                className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shadow-md transition-transform group-hover:scale-110 ${
+                  index === 0
+                    ? "bg-gradient-to-br from-yellow-400 to-orange-500 text-white"
+                    : index === 1
+                    ? "bg-gradient-to-br from-gray-300 to-gray-400 text-white"
+                    : index === 2
+                    ? "bg-gradient-to-br from-orange-300 to-orange-400 text-white"
+                    : "bg-gradient-to-br from-orange-100 to-red-100 text-orange-700"
+                }`}
+              >
+                {index + 1}
+              </div>
+            </div>
+
+            {/* Content */}
             <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-sm line-clamp-2 group-hover:text-blue-600 transition-colors">
+              <h3 className="font-bold text-sm line-clamp-2 group-hover:text-orange-600 transition-colors leading-snug mb-1">
                 {post.title}
               </h3>
-              <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
-                <span>{post.user?.username}</span>
+              <div className="flex items-center gap-2 text-xs text-gray-500">
+                <span className="flex items-center gap-1">
+                  <svg
+                    className="w-3 h-3"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+                  </svg>
+                  {post.user?.username}
+                </span>
+                <span>•</span>
+                <span className="flex items-center gap-1">
+                  <svg
+                    className="w-3 h-3"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                    <path
+                      fillRule="evenodd"
+                      d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  {post.visit || 0}
+                </span>
                 <span>•</span>
                 <span>{format(post.createdAt)}</span>
               </div>
             </div>
+
+            {/* Arrow Icon */}
+            <div className="flex-shrink-0 self-center">
+              <svg
+                className="w-5 h-5 text-gray-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
           </Link>
         ))}
       </div>
+
+      {/* View All Button */}
       <Link
         to="/trending"
-        className="mt-4 block text-center text-orange-600 hover:text-orange-700 font-semibold text-sm"
+        className="mt-6 flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold rounded-xl transition-all duration-300 shadow-md hover:shadow-lg group"
       >
-        View All Trending →
+        <span>View All Trending</span>
+        <svg
+          className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M13 7l5 5m0 0l-5 5m5-5H6"
+          />
+        </svg>
       </Link>
     </div>
   );

@@ -33,8 +33,8 @@ const Homepage = () => {
             viewBox="0 0 200 200"
             width="200"
             height="200"
-            className="text-lg tracking-widest "
-            // className="text-lg tracking-widest animate-spin animateButton"
+            // className="text-lg tracking-widest "
+            className="text-lg tracking-widest animate-spin animateButton"
           >
             <path
               id="circlePath"
@@ -70,18 +70,53 @@ const Homepage = () => {
       <MainCategories />
       {/* Feature Post */}
       <FeaturedPosts />
-      {/* MAIN CONTENT WITH SIDEBAR */}
-      <div className="flex flex-col lg:flex-row gap-8">
-        {/* Post List */}
-        <div className="flex-1">
-          <h1 className="my-8 text-2xl text-gray-600">Recent Posts</h1>
-          <PostList />
+
+      {/* TRENDING & POPULAR SECTION */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <TrendingPosts />
+        <PopularPosts />
+      </div>
+
+      {/* RECENT POSTS - FULL WIDTH */}
+      <div className="mb-8">
+        {/* Section Header */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
+                <span className="text-4xl">📰</span>
+                Recent Posts
+              </h2>
+              <p className="text-gray-600 mt-2">
+                Stay updated with the latest articles and insights
+              </p>
+            </div>
+            <Link
+              to="/posts"
+              className="hidden md:flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors font-medium"
+            >
+              View All
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </Link>
+          </div>
+          {/* Divider */}
+          <div className="mt-4 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full" />
         </div>
-        {/* Sidebar */}
-        <div className="lg:w-80 flex-shrink-0 space-y-6">
-          <TrendingPosts />
-          <PopularPosts />
-        </div>
+
+        {/* Posts Grid */}
+        <PostList />
       </div>
     </div>
   );
