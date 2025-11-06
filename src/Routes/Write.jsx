@@ -57,7 +57,12 @@ const Write = () => {
   }, []);
 
   // Fetch post data if editing
-  const { data: existingPost } = useQuery({
+  const {
+    data: existingPost,
+    isLoading: isPostLoading,
+    isError: isPostError,
+    error: postError,
+  } = useQuery({
     queryKey: ["post-edit", editPostSlug],
     queryFn: async () => {
       if (!editPostSlug) return null;
@@ -67,6 +72,8 @@ const Write = () => {
       return res.data;
     },
     enabled: !!editPostSlug,
+    retry: 1,
+    refetchOnWindowFocus: false,
   });
 
   // Load existing post data into form
@@ -206,15 +213,82 @@ const Write = () => {
   });
 
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-[calc(100vh-80px)]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
   }
 
   if (isLoaded && !isSignedIn) {
-    return <div>You should login!</div>;
+    return (
+      <div className="flex justify-center items-center h-[calc(100vh-80px)]">
+        <div className="text-center">
+          <p className="text-xl text-gray-700 mb-4">
+            🔒 Authentication Required
+          </p>
+          <p className="text-gray-600">Please login to access this page</p>
+        </div>
+      </div>
+    );
   }
 
-  if (editPostSlug && !existingPost) {
-    return <div>Loading post...</div>;
+  if (editPostSlug) {
+    if (isPostLoading) {
+      return (
+        <div className="flex justify-center items-center h-[calc(100vh-80px)]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading post data...</p>
+          </div>
+        </div>
+      );
+    }
+
+    if (isPostError) {
+      return (
+        <div className="flex justify-center items-center h-[calc(100vh-80px)]">
+          <div className="text-center max-w-md">
+            <p className="text-xl text-red-600 mb-4">❌ Failed to Load Post</p>
+            <p className="text-gray-600 mb-4">
+              {postError?.response?.data?.message ||
+                postError?.message ||
+                "Something went wrong while fetching the post."}
+            </p>
+            <p className="text-sm text-gray-500 mb-4">Slug: {editPostSlug}</p>
+            <button
+              onClick={() => navigate("/")}
+              className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+            >
+              Go Back Home
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    if (!existingPost) {
+      return (
+        <div className="flex justify-center items-center h-[calc(100vh-80px)]">
+          <div className="text-center max-w-md">
+            <p className="text-xl text-red-600 mb-4">❌ Post Not Found</p>
+            <p className="text-gray-600 mb-4">
+              We couldn&apos;t find a post with the provided slug.
+            </p>
+            <p className="text-sm text-gray-500 mb-4">Slug: {editPostSlug}</p>
+            <button
+              onClick={() => navigate("/")}
+              className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+            >
+              Go Back Home
+            </button>
+          </div>
+        </div>
+      );
+    }
   }
 
   const handleSubmit = async (e) => {
